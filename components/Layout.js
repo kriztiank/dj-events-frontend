@@ -1,14 +1,16 @@
 import Head from 'next/head'
-// import { useRouter } from 'next/router'
+import { makePublicRouterInstance, useRouter } from 'next/router'
 import Header from './Header'
 import Footer from './Footer'
-// import Showcase from './Showcase'
+import Showcase from './Showcase'
 // import InfoBox from './InfoBox'
-import styles from '../styles/Layout.module.css'
+import styles from '@/styles/Layout.module.css'
 
 
 
 export default function Layout({ title, keywords, description, children }) {
+    const router = useRouter()
+
     return (
         <div>
             <Head>
@@ -18,6 +20,8 @@ export default function Layout({ title, keywords, description, children }) {
             </Head>
 
             <Header />
+            {/* && then */}
+            {router.pathname === '/' && <Showcase />}
 
             <div className={styles.container}>
                 {children}
