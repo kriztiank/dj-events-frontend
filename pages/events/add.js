@@ -34,6 +34,22 @@ export default function AddEventPage() {
             // console.log('Please fill in all fields')
           toast.error('Please fill in all fields')
         }
+
+        const res = await fetch(`${API_URL}/events`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(values),
+        })
+
+        if (!res.ok) {
+          toast.error('Something Went Wrong')
+        } else {
+            const evt = await res.json()
+            router.push(`/events/${evt.slug}`)
+          }
     }
 
     const handleInputChange = (e) => {
