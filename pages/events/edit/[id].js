@@ -9,7 +9,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '@/components/Layout'
 import Modal from '@/components/Modal'
-// import ImageUpload from '@/components/ImageUpload'
+import ImageUpload from '@/components/ImageUpload'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Form.module.css'
 
@@ -67,6 +67,13 @@ export default function EditEventPage({ evt }) {
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
     }
+
+    const imageUploaded = async (e) => {
+        const res = await fetch(`${API_URL}/events/${evt.id}`)
+        const data = await res.json()
+        setImagePreview(data.image.formats.thumbnail.url)
+        setShowModal(false)
+      }
 
     return (
         <Layout title='Add New Event'>
@@ -169,12 +176,11 @@ export default function EditEventPage({ evt }) {
             </div>
 
             <Modal show={showModal} onClose={() => setShowModal(false)}>
-                {/* <ImageUpload
+                <ImageUpload
                     evtId={evt.id}
                     imageUploaded={imageUploaded}
-                    token={token}
-                /> */}
-                IMAGE UPLOAD
+                    // token={token}
+                />
             </Modal>
         </Layout>
     )
