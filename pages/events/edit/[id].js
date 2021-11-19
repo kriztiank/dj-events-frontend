@@ -73,7 +73,7 @@ export default function EditEventPage({ evt }) {
         const data = await res.json()
         setImagePreview(data.image.formats.thumbnail.url)
         setShowModal(false)
-      }
+    }
 
     return (
         <Layout title='Add New Event'>
@@ -179,7 +179,7 @@ export default function EditEventPage({ evt }) {
                 <ImageUpload
                     evtId={evt.id}
                     imageUploaded={imageUploaded}
-                    // token={token}
+                // token={token}
                 />
             </Modal>
         </Layout>
@@ -191,6 +191,8 @@ export async function getServerSideProps({ params: { id }, req }) {
 
     const res = await fetch(`${API_URL}/events/${id}`)
     const evt = await res.json()
+
+    console.log(req.headers.cookie)
 
     return {
         props: {
