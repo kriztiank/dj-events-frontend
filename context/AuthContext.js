@@ -14,25 +14,24 @@ export const AuthProvider = ({ children }) => {
 
   // Register user
   const register = async (user) => {
-    console.log(user)
+    // console.log(user)
+    const res = await fetch(`${NEXT_URL}/api/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
 
-    // const res = await fetch(`${NEXT_URL}/api/register`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(user),
-    // })
+    const data = await res.json()
 
-    // const data = await res.json()
-
-    // if (res.ok) {
-    //   setUser(data.user)
-    //   router.push('/account/dashboard')
-    // } else {
-    //   setError(data.message)
-    //   setError(null)
-    // }
+    if (res.ok) {
+      setUser(data.user)
+      router.push('/account/dashboard')
+    } else {
+      setError(data.message)
+      setError(null)
+    }
   }
 
   // Login user
