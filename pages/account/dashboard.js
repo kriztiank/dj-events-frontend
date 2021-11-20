@@ -1,11 +1,12 @@
-// import { parseCookies } from '@/helpers/index'
+import { parseCookies } from '@/helpers/index'
 // import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 // import DashboardEvent from '@/components/DashboardEvent'
-// import { API_URL } from '@/config/index'
-// import styles from '@/styles/Dashboard.module.css'
+import { API_URL } from '@/config/index'
+import styles from '@/styles/Dashboard.module.css'
 
 export default function DashboardPage({ events, token }) {
+  console.log(events)
   // const router = useRouter()
 
   // const deleteEvent = async (id) => {
@@ -42,22 +43,22 @@ export default function DashboardPage({ events, token }) {
   )
 }
 
-// export async function getServerSideProps({ req }) {
-//   const { token } = parseCookies(req)
+export async function getServerSideProps({ req }) {
+  const { token } = parseCookies(req)
 
-//   const res = await fetch(`${API_URL}/events/me`, {
-//     method: 'GET',
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   })
+  const res = await fetch(`${API_URL}/events/me`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
 
-//   const events = await res.json()
+  const events = await res.json()
 
-//   return {
-//     props: {
-//       events,
-//       token,
-//     },
-//   }
-// }
+  return {
+    props: {
+      events,
+      // token,
+    },
+  }
+}
