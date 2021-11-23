@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout'
-import EventItem from '@/components/EventItem'
+import EventItem from '@/components/Eventitem'
 import Pagination from '@/components/Pagination'
 import { API_URL, PER_PAGE } from '@/config/index'
 
